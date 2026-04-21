@@ -5,5 +5,5 @@ namespace TechScreen.Web.Services;
 
 public class DefaultBrandingService : IBrandingService
 {
-    public IHtmlContent Logo { get; } = new HtmlString("""<img src="/TechScreen.svg" alt="Logo" height="32" />""");
+    public IHtmlContent Logo { get; } = new HtmlString("""<img src="/Spawtz.svg" alt="Logo" height="32" />""");
 }
