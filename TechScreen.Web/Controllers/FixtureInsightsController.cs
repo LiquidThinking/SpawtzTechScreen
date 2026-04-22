@@ -27,13 +27,16 @@ select
     null as FirstGame,
     null as FinalGame;
 
-select
-    'Stub' as Season,
+select distinct
+    Competition as [Name],
+    0 as TeamCount,
     0 as FixtureCount,
     0 as RoundCount,
     null as FirstGame,
     null as FinalGame,
-    null as DurationInDays;
+    null as DurationInDays
+from
+    Fixtures
 ";
 
         await using (var dbReader = await _dbContext
@@ -67,7 +70,9 @@ select
 
         public class SeasonInsights
         {
-            public string Season { get; set; } = string.Empty;
+            public string Name { get; set; } = string.Empty;
+
+            public int TeamCount { get; set; }
 
             public int FixtureCount { get; set; }
 

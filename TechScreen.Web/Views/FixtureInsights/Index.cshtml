@@ -32,18 +32,27 @@
             <thead>
                 <tr>
                     <th>Season</th>
+                    <th>Teams</th>
                     <th>Fixtures</th>
                     <th>Rounds</th>
                     <th>First Game</th>
                     <th>Final Game</th>
-                    <th>Span (days)</th>
+                    <th>Duration (days)</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach (var season in Model.Seasons)
                 {
                     <tr>
-                        <td>@season.Season</td>
+                        <td>
+                            <a href="#"
+                               hx-get="@Url.Action("Index", "Standings", new { competition = season.Name })"
+                               hx-target="#standings-modal"
+                               hx-swap="innerHTML">
+                                @season.Name
+                            </a>
+                        </td>
+                        <td>@season.TeamCount</td>
                         <td>@season.FixtureCount</td>
                         <td>@season.RoundCount</td>
                         <td>@(season.FirstGame?.ToString("dd MMM yyyy") ?? "-")</td>
@@ -59,3 +68,17 @@
         <p><em>No per-season data — implement the SQL queries in FixtureInsightsController to populate this.</em></p>
     }
 </div>
+
+<div id="standings-modal" class="modal fade" tabindex="-1">
+</div>
+
+@section Scripts {
+    <script>
+        document.body.addEventListener('htmx:afterSwap', function (event) {
+            if (event.detail.target.id === 'standings-modal') {
+                var modal = new bootstrap.Modal(event.detail.target);
+                modal.show();
+            }
+        });
+    </script>
+}
