@@ -1,6 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <None Remove="Assets\PlayRoundersLogo.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\PlayRoundersLogo.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\TechScreen.Abstractions\TechScreen.Abstractions.csproj" />
   </ItemGroup>
 

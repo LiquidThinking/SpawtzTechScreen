@@ -1,9 +1,13 @@
 @inject TechScreen.Web.Services.TenantContext TenantContext
 @inject TechScreen.Abstractions.IBrandingService BrandingService
-@inject TechScreen.Abstractions.IFooterService FooterService
+@inject Microsoft.Extensions.Configuration.IConfiguration Configuration
 
 @{
     var theme = TenantContext.Theme;
+    var baseDomain = Configuration["Multitenancy:BaseDomain"] ?? "localhost";
+    var scheme = Context.Request.Scheme;
+    var port = Context.Request.Host.Port;
+    var homeUrl = port.HasValue ? $"{scheme}://{baseDomain}:{port}/" : $"{scheme}://{baseDomain}/";
 }
 
 <!DOCTYPE html>
@@ -11,6 +15,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="~/spawtz-cropped-favicon-32x32.png" sizes="32x32" />
     <title>@ViewData["Title"] - TechScreen.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
@@ -49,8 +54,8 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
-                    @BrandingService.Logo
+                <a class="navbar-brand d-flex align-items-center" href="@homeUrl">
+                    @await BrandingService.GetLogo()
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +81,7 @@
            }
            else
            {
-                <text>@await FooterService.GetFooterText(DateOnly.FromDateTime(DateTime.Today))</text>
+                <text>@TenantContext.FriendlyName - 2025</text>
            }
         </div>
     </footer>

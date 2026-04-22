@@ -38,7 +38,6 @@ builder.Services.AddScoped<TenantContext>();
 var registry = new TenantServiceRegistry();
 
 registry.RegisterDefault<IPointsConfiguration, DefaultPointsConfiguration>();
-registry.RegisterDefault<IFooterService, DefaultFooterService>();
 registry.RegisterDefault<IBrandingService, DefaultBrandingService>();
 
 foreach (var plugin in plugins)
