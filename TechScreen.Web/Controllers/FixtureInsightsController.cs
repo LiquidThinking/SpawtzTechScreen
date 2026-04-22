@@ -24,15 +24,15 @@ public class FixtureInsightsController : Controller
         const string sql = @"
 select
     0 as TotalFixtures,
-    null as EarliestGame,
-    null as LatestGame;
+    null as FirstGame,
+    null as FinalGame;
 
 select
     'Stub' as Season,
     0 as FixtureCount,
     0 as RoundCount,
-    null as EarliestGame,
-    null as LatestGame,
+    null as FirstGame,
+    null as FinalGame,
     null as DurationInDays;
 ";
 
@@ -59,9 +59,9 @@ select
 
         public int TotalFixtures { get; set; }
 
-        public DateTime? EarliestGame { get; set; }
+        public DateTime? FirstGame { get; set; }
 
-        public DateTime? LatestGame { get; set; }
+        public DateTime? FinalGame { get; set; }
 
         public List<SeasonInsights> Seasons { get; set; } = new();
 
@@ -73,9 +73,9 @@ select
 
             public int RoundCount { get; set; }
 
-            public DateTime? EarliestGame { get; set; }
+            public DateTime? FirstGame { get; set; }
 
-            public DateTime? LatestGame { get; set; }
+            public DateTime? FinalGame { get; set; }
 
             public int? DurationInDays { get; set; }
         }

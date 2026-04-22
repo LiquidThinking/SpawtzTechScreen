@@ -12,15 +12,15 @@
         <thead>
             <tr>
                 <th>Total Fixtures</th>
-                <th>Earliest Game</th>
-                <th>Latest Game</th>
+                <th>First Game</th>
+                <th>Final Game</th>
             </tr>
         </thead>
         <tbody>
             <tr>
                 <td>@Model.TotalFixtures</td>
-                <td>@(Model.EarliestGame?.ToString("dd MMM yyyy") ?? "-")</td>
-                <td>@(Model.LatestGame?.ToString("dd MMM yyyy") ?? "-")</td>
+                <td>@(Model.FirstGame?.ToString("dd MMM yyyy") ?? "-")</td>
+                <td>@(Model.FinalGame?.ToString("dd MMM yyyy") ?? "-")</td>
             </tr>
         </tbody>
     </table>
@@ -34,8 +34,8 @@
                     <th>Season</th>
                     <th>Fixtures</th>
                     <th>Rounds</th>
-                    <th>Earliest Game</th>
-                    <th>Latest Game</th>
+                    <th>First Game</th>
+                    <th>Final Game</th>
                     <th>Span (days)</th>
                 </tr>
             </thead>
@@ -46,8 +46,8 @@
                         <td>@season.Season</td>
                         <td>@season.FixtureCount</td>
                         <td>@season.RoundCount</td>
-                        <td>@(season.EarliestGame?.ToString("dd MMM yyyy") ?? "-")</td>
-                        <td>@(season.LatestGame?.ToString("dd MMM yyyy") ?? "-")</td>
+                        <td>@(season.FirstGame?.ToString("dd MMM yyyy") ?? "-")</td>
+                        <td>@(season.FinalGame?.ToString("dd MMM yyyy") ?? "-")</td>
                         <td>@(season.DurationInDays?.ToString() ?? "-")</td>
                     </tr>
                 }
