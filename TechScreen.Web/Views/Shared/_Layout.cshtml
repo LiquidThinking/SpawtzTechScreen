@@ -1,6 +1,5 @@
 @inject TechScreen.Web.Services.TenantContext TenantContext
 @inject TechScreen.Abstractions.IBrandingService BrandingService
-@inject TechScreen.Abstractions.IFooterService FooterService
 
 @{
     var theme = TenantContext.Theme;
@@ -50,7 +49,7 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
                 <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
-                    @BrandingService.Logo
+                    @await BrandingService.GetLogo()
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -76,7 +75,7 @@
            }
            else
            {
-                <text>@await FooterService.GetFooterText(DateOnly.FromDateTime(DateTime.Today))</text>
+                <text>@TenantContext.FriendlyName - 2025</text>
            }
         </div>
     </footer>

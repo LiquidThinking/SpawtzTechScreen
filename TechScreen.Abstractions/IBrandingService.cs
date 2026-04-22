@@ -4,5 +4,5 @@ namespace TechScreen.Abstractions;
 
 public interface IBrandingService
 {
-    IHtmlContent Logo { get; }
+    Task<IHtmlContent> GetLogo();
 }

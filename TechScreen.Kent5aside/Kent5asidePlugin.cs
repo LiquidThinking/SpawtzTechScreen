@@ -8,14 +8,21 @@ public class Kent5asidePlugin : ITenantPlugin
 
     public void ConfigureServices(ITenantServiceBuilder services)
     {
-        services.AddScoped<IFooterService, Kent5asideFooterService>();
+        services.AddScoped<IPointsConfiguration, Kent5asideScoringConfiguration>();
     }
 }
 
-public class Kent5asideFooterService : IFooterService
+internal class Kent5asideScoringConfiguration : IPointsConfiguration
 {
-    public Task<string> GetFooterText(DateOnly today)
-    {
-        return Task.FromResult($"Kent5aside - Kent's BEST game - {today.Year}");
-    }
+    public int WinPoints => 3;
+
+    public int DrawPoints => 0;
+
+    public int LossPoints => -1;
+
+    public StandingsOrderField[] StandingsOrder { get; } =
+    [
+        StandingsOrderField.Points,
+        StandingsOrderField.Won
+    ];
 }
